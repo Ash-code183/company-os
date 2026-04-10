@@ -276,6 +276,44 @@ Mid-session state saves for long-running work.
 
 Captures: git state, decisions made, remaining tasks, context summary.
 
+### Tier 4 — claude-mem (Compressed Tool Output History)
+
+Captures tool outputs from every session, compresses them to ~50-token semantic observations, and injects the most relevant ~500 tokens into future sessions via FTS5 semantic search.
+
+```bash
+# Start the worker once (add to ~/.zshrc for auto-start)
+node ~/.claude/plugins/cache/thedotmack/claude-mem/10.0.6/scripts/worker-cli.js start
+
+# Wire into agent heartbeat (Step 2 of each agent's checklist)
+node ~/.claude/plugins/cache/thedotmack/claude-mem/10.0.6/scripts/context-generator.cjs \
+  --project-path "$(pwd)" --query "[agent-name] [current-task]"
+```
+
+~10x token efficiency vs repeating raw tool output in every heartbeat. See `memory/claude-mem-setup.md`.
+
+### Tier 5 — Auto Dream (Nightly MEMORY.md Consolidation)
+
+Nightly script that promotes high-confidence learnings (≥8/10) from `learnings.jsonl` into `MEMORY.md`, keeping the file under the 200-line limit.
+
+```bash
+./memory/auto-dream.sh --dry-run   # preview
+./memory/auto-dream.sh             # run
+
+# Cron: nightly at 2am
+(crontab -l 2>/dev/null; echo "0 2 * * * $(pwd)/memory/auto-dream.sh") | crontab -
+```
+
+### Token Budget Summary
+
+| Layer | Cost | Frequency |
+|-------|------|-----------|
+| MEMORY.md | ~1,500 tokens | Every session |
+| learnings.jsonl (top 3) | ~300 tokens | Every gstack skill |
+| claude-mem context | ~500 tokens | Every heartbeat |
+| Checkpoints | 2K-5K tokens | Explicit `/checkpoint` |
+
+**Total heartbeat overhead: ~2,300 tokens** — ~77% less than unoptimized Paperclip.
+
 See `memory/README.md` for full documentation.
 
 ---
@@ -338,7 +376,7 @@ npx paperclipai run --agent chief-of-staff --task "Review our product strategy"
 
 ```
 company-os/
-├── .paperclip.yaml          ← company config: agents, models, skills, teams
+├── .paperclip.yaml          ← company config: agents, models, skills, memory, teams
 ├── CLAUDE.md                ← gstack skill routing (40+ routes for Claude Code)
 ├── COMPANY.md               ← product overview, stack explanation, getting started
 ├── AGENTS.md                ← full agent roster, skill matrix, coordination protocols
@@ -364,7 +402,10 @@ company-os/
 │   └── creative/README.md   ← design + content workflow, DESIGN.md as source of truth
 │
 └── memory/
-    └── README.md            ← 3-layer memory system documentation
+    ├── README.md            ← 5-layer memory system documentation
+    ├── heartbeat.md         ← heartbeat checklist template for all 11 agents
+    ├── claude-mem-setup.md  ← claude-mem Paperclip integration guide
+    └── auto-dream.sh        ← nightly MEMORY.md consolidation script
 ```
 
 ---

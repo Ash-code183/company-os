@@ -37,6 +37,10 @@ agents:
       - write-brief
       - evaluating
       - brainstorming
+    memory:
+      claude_mem: true
+      max_context_tokens: 500    # strategy context — keep focused
+      inject_on_heartbeat: true
 
   product-manager:
     model: claude-sonnet-4-6
@@ -48,6 +52,10 @@ agents:
       - synthesize-research
       - evaluating
       - frame-problem
+    memory:
+      claude_mem: true
+      max_context_tokens: 600    # product context: user research, specs
+      inject_on_heartbeat: true
 
   research-analyst:
     model: claude-sonnet-4-6
@@ -59,6 +67,10 @@ agents:
       - researching-codebase
       - synthesize-research
       - writing-documentation
+    memory:
+      claude_mem: true
+      max_context_tokens: 800    # research history is high-value context
+      inject_on_heartbeat: true
 
   cto:
     model: claude-opus-4-6
@@ -71,6 +83,10 @@ agents:
       - review
       - devex-review
       - cso
+    memory:
+      claude_mem: true
+      max_context_tokens: 800    # architecture decisions, code patterns
+      inject_on_heartbeat: true
 
   frontend-engineer:
     model: claude-sonnet-4-6
@@ -82,6 +98,10 @@ agents:
       - design-shotgun
       - qa
       - benchmark
+    memory:
+      claude_mem: true
+      max_context_tokens: 700    # component patterns, DESIGN.md context
+      inject_on_heartbeat: true
 
   backend-engineer:
     model: claude-sonnet-4-6
@@ -93,6 +113,10 @@ agents:
       - careful
       - writing-plans
       - researching-codebase
+    memory:
+      claude_mem: true
+      max_context_tokens: 800    # engineers benefit from more code context
+      inject_on_heartbeat: true
 
   release-engineer:
     model: claude-sonnet-4-6
@@ -105,6 +129,10 @@ agents:
       - document-release
       - retro
       - checkpoint
+    memory:
+      claude_mem: true
+      max_context_tokens: 400    # deploy history, branch state
+      inject_on_heartbeat: true
     inputs:
       env:
         GH_TOKEN:
@@ -122,6 +150,10 @@ agents:
       - browse
       - setup-browser-cookies
       - design-review
+    memory:
+      claude_mem: true
+      max_context_tokens: 500    # test patterns, known failure modes
+      inject_on_heartbeat: true
 
   design-consultant:
     model: claude-sonnet-4-6
@@ -133,6 +165,10 @@ agents:
       - design-html
       - brand-voice-enforcement
       - plan-design-review
+    memory:
+      claude_mem: true
+      max_context_tokens: 600    # design decisions, brand history
+      inject_on_heartbeat: true
 
   security-officer:
     model: claude-sonnet-4-6
@@ -143,6 +179,10 @@ agents:
       - careful
       - freeze
       - review
+    memory:
+      claude_mem: true
+      max_context_tokens: 500    # threat model, prior findings
+      inject_on_heartbeat: true
 
   content-writer:
     model: claude-sonnet-4-6
@@ -153,6 +193,10 @@ agents:
       - write-brief
       - writing-documentation
       - evaluating
+    memory:
+      claude_mem: true
+      max_context_tokens: 400    # brand voice patterns, tone decisions
+      inject_on_heartbeat: true
 
 teams:
   product:

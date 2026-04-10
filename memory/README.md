@@ -107,7 +107,66 @@ The earnings counter should animate from previous value to new value on task com
 
 ---
 
-## 4. Research Briefings — Last30Days Archive
+## 4. claude-mem — Compressed Tool Output History
+
+**Path:** `~/.claude-mem/claude-mem.db` (SQLite with FTS5 search)
+
+**What it is:** A Claude Code plugin that captures tool outputs (read_file, bash commands, etc.), compresses them to ~50-token semantic observations, and injects the most relevant ones into future sessions. ~10x more token-efficient than repeating raw tool output.
+
+**Installed at:** `~/.claude/plugins/cache/thedotmack/claude-mem/10.0.6/`
+
+**Start the worker (required):**
+```bash
+node ~/.claude/plugins/cache/thedotmack/claude-mem/10.0.6/scripts/worker-cli.js start
+```
+
+**Wire into Paperclip heartbeat (Step 2 of each agent's checklist):**
+```bash
+node ~/.claude/plugins/cache/thedotmack/claude-mem/10.0.6/scripts/context-generator.cjs \
+  --project-path "$(pwd)" \
+  --query "[agent-name] [current-task-keyword]"
+```
+
+**Token budget in `.paperclip.yaml`:**
+```yaml
+memory:
+  claude_mem: true
+  max_context_tokens: 500
+  inject_on_heartbeat: true
+```
+
+**Full setup guide:** `memory/claude-mem-setup.md`
+
+---
+
+## 5. Auto Dream — Nightly MEMORY.md Consolidation
+
+**Path:** `memory/auto-dream.sh`
+
+**What it is:** A nightly script that searches `learnings.jsonl` for high-confidence entries (≥8/10) and promotes them to `MEMORY.md`, keeping the file under the 200-line limit. Named after REM sleep memory consolidation.
+
+**Run manually:**
+```bash
+./memory/auto-dream.sh --dry-run   # preview changes
+./memory/auto-dream.sh             # run consolidation
+```
+
+**Wire to cron (nightly at 2am):**
+```bash
+(crontab -l 2>/dev/null; echo "0 2 * * * /path/to/company-os/memory/auto-dream.sh") | crontab -
+```
+
+**What it does:**
+1. Reads all learnings from `learnings.jsonl`
+2. Groups by type: patterns, pitfalls, architecture, operational
+3. Appends high-confidence entries (≥8/10) to `MEMORY.md`
+4. Enforces 190-line soft limit (with buffer before 200-line truncation)
+5. Removes promoted entries from `learnings.jsonl` to avoid duplication
+6. Logs each dream session to `memory/dream-log.jsonl`
+
+---
+
+## 6. Research Briefings — Last30Days Archive
 
 **Path:** `~/Documents/Last30Days/[topic]-raw-v3.md`
 
@@ -126,12 +185,31 @@ Always active (every session):
 On gstack skill start:
   learnings.jsonl             ← top 3 relevant learnings searched
 
+On Paperclip heartbeat:
+  claude-mem DB               ← ~500 tokens of compressed tool output history
+                                 (context-generator.cjs via FTS5 search)
+
 On explicit resume:
   checkpoint/*.md             ← full session state from /checkpoint
+
+Nightly (cron):
+  auto-dream.sh               ← promotes high-confidence learnings to MEMORY.md
 
 On research tasks:
   ~/Documents/Last30Days/     ← prior research briefings
 ```
+
+## Token Efficiency by Layer
+
+| Layer | What It Stores | Token Cost |
+|-------|---------------|-----------|
+| MEMORY.md | Stable patterns, project conventions | ~1,500 tokens (200 lines) |
+| learnings.jsonl (top 3) | Session-relevant operational patterns | ~300 tokens |
+| claude-mem (heartbeat) | Compressed tool output history | ~500 tokens (vs 5K-10K raw) |
+| checkpoint | Full session state | 2K-5K tokens (explicit use only) |
+
+**Total heartbeat overhead:** ~2,300 tokens vs 10K+ without the memory layer.
+**Reduction: ~77%** compared to baseline Paperclip without memory optimization.
 
 ---
 
