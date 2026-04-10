@@ -71,6 +71,38 @@ agents:
       claude_mem: true
       max_context_tokens: 800    # research history is high-value context
       inject_on_heartbeat: true
+    inputs:
+      env:
+        XAI_API_KEY:
+          kind: secret
+          requirement: recommended    # X/Twitter research — method A (no browser needed)
+          docs: credentials/README.md#xai_api_key--method-a-xai-api-key-recommended-for-teams
+        FROM_BROWSER:
+          kind: value
+          requirement: recommended    # X/Twitter research — method B (free, reads browser cookies)
+          docs: credentials/README.md#method-b-browser-cookies-free-for-personal-use
+        SCRAPECREATORS_API_KEY:
+          kind: secret
+          requirement: optional       # adds TikTok + Instagram to /last30days-nux
+          docs: credentials/README.md#scrapecreators_api_key--tiktok--instagram-research
+        BRAVE_API_KEY:
+          kind: secret
+          requirement: optional       # better web search in /researching-web
+          docs: credentials/README.md#brave_api_key--web-search
+        EXA_API_KEY:
+          kind: secret
+          requirement: optional       # semantic web search fallback
+          docs: credentials/README.md#exa_api_key--web-search
+        OPENROUTER_API_KEY:
+          kind: secret
+          requirement: optional       # Perplexity Sonar deep research mode
+          docs: credentials/README.md#openrouter_api_key--deep-research-perplexity-sonar
+        BSKY_HANDLE:
+          kind: value
+          requirement: optional       # Bluesky research in /last30days-nux
+        BSKY_APP_PASSWORD:
+          kind: secret
+          requirement: optional       # Bluesky research in /last30days-nux
 
   cto:
     model: claude-opus-4-6
@@ -137,6 +169,28 @@ agents:
       env:
         GH_TOKEN:
           kind: secret
+          requirement: recommended    # PR creation + GitHub API — full /ship workflow
+          docs: credentials/README.md#gh_token--github-personal-access-token
+        VERCEL_TOKEN:
+          kind: secret
+          requirement: optional       # required only if deploying to Vercel
+          docs: credentials/README.md#vercel
+        VERCEL_ORG_ID:
+          kind: value
+          requirement: optional
+        VERCEL_PROJECT_ID:
+          kind: value
+          requirement: optional
+        FLY_API_TOKEN:
+          kind: secret
+          requirement: optional       # required only if deploying to Fly.io
+          docs: credentials/README.md#flyio
+        RENDER_API_KEY:
+          kind: secret
+          requirement: optional       # required only if deploying to Render
+          docs: credentials/README.md#render
+        RENDER_SERVICE_ID:
+          kind: value
           requirement: optional
 
   qa-engineer:
@@ -237,6 +291,52 @@ agents:
       max_context_tokens: 1000   # founder context is high-value — more budget
       inject_on_heartbeat: true
     skills_path: ./skills          # local skills directory (relative to repo root)
+    inputs:
+      env:
+        XAI_API_KEY:
+          kind: secret
+          requirement: recommended    # X research in /x-research + /last30days-nux
+          docs: credentials/README.md#x--twitter-access
+        FROM_BROWSER:
+          kind: value
+          requirement: recommended    # alternative to XAI_API_KEY (free)
+          docs: credentials/README.md#method-b-browser-cookies-free-for-personal-use
+        STRIPE_SECRET_KEY:
+          kind: secret
+          requirement: optional       # live MRR data in /runway
+          docs: credentials/README.md#stripe_secret_key--revenue-data
+        BEEHIIV_API_KEY:
+          kind: secret
+          requirement: optional       # newsletter automation in /content-machine
+          docs: credentials/README.md#beehiiv_api_key--convertkit_api_key--newsletter-automation
+        CONVERTKIT_API_KEY:
+          kind: secret
+          requirement: optional       # email list in /content-machine
+          docs: credentials/README.md#beehiiv_api_key--convertkit_api_key--newsletter-automation
+        CARTA_API_KEY:
+          kind: secret
+          requirement: optional       # live cap table in /cap-table
+          docs: credentials/README.md#carta_api_key--pulley_api_key--cap-table-sync
+        PULLEY_API_KEY:
+          kind: secret
+          requirement: optional       # live cap table (simpler than Carta)
+          docs: credentials/README.md#carta_api_key--pulley_api_key--cap-table-sync
+        LOOM_API_KEY:
+          kind: secret
+          requirement: optional       # demo upload/sharing in /demo-script
+          docs: credentials/README.md#loom_api_key--product-demos
+        SCRAPECREATORS_API_KEY:
+          kind: secret
+          requirement: optional       # TikTok/Instagram research
+          docs: credentials/README.md#scrapecreators_api_key--tiktok--instagram-research
+        BRAVE_API_KEY:
+          kind: secret
+          requirement: optional       # web search fallback
+          docs: credentials/README.md#brave_api_key--web-search
+        OPENROUTER_API_KEY:
+          kind: secret
+          requirement: optional       # deep research mode
+          docs: credentials/README.md#openrouter_api_key--deep-research-perplexity-sonar
 
 teams:
   product:

@@ -1,5 +1,25 @@
 # Changelog — company-os
 
+## [1.3.0] — 2026-04-10
+
+### Added
+- **`.env.example`** — canonical credential template covering all 17 credentials across all agents. Organized by category (GitHub, X/Twitter, Web Search, Social Research, Solo Founder finance/content/product). Each entry has a tier label (CORE / RECOMMENDED / OPTIONAL) and inline comment explaining where to get it.
+- **`credentials/README.md`** — full credential guide: credential map table, tier definitions, step-by-step setup guide per credential with exact scope requirements, per-agent breakdown, security practices (minimum scopes, rotation schedule, breach response).
+- **`credentials/check.sh`** — preflight validation script. Loads `.env`, checks every credential, reports what's configured (✓), what's missing but recommended (⚠), what's missing but optional (○), and what's missing and required (✗). Supports `--agent [name]` filter and `--json` machine-readable output. Exits with code 1 if any CORE credential is missing.
+- **`.gitignore`** — excludes `.env`, `.env.local`, OS artifacts, editor files. Prevents accidental credential commits.
+
+### Changed
+- **`.paperclip.yaml`** — added formal `inputs.env` blocks to `research-analyst`, `release-engineer`, and `solo-founder` agents. Every credential is now declared with `kind` (secret/value), `requirement` (core/recommended/optional), and a `docs` pointer to the relevant section of `credentials/README.md`.
+
+### Design Decisions
+- **`.env.example` as the single source of truth.** One file to copy, one file to fill in. No credential is described only in a skill doc buried 3 levels deep.
+- **Three tiers, not just required/optional.** CORE (agent won't function), RECOMMENDED (works but degraded), OPTIONAL (specific integrations). Founders setting up for the first time know exactly where to start.
+- **`check.sh` over docs alone.** Static docs go stale. A script that reads your actual `.env` and reports live status doesn't. First-time setup + ongoing rotation both use the same tool.
+- **X/Twitter via any of three methods.** Not everyone has an xAI API key. `check.sh` recognizes `XAI_API_KEY`, `FROM_BROWSER=auto`, or `X_AUTH_TOKEN+X_CT0` — whichever is set, it passes.
+- **Minimum scopes documented per credential.** Security principle of least privilege built into the setup guide, not left as an afterthought.
+
+---
+
 ## [1.2.0] — 2026-04-10
 
 ### Added
