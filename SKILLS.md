@@ -139,6 +139,49 @@ Every skill is a slash command (`/skill-name`) in Claude Code.
 
 ---
 
+## XII. Solo Founder Skills (Tier 1 — Critical)
+
+> Skills for founders in the first 0-6 months. Customer discovery, PMF, fundraising, financial survival.
+
+| Skill | Trigger | What It Does |
+|-------|---------|-------------|
+| `user-interview` | "talk to users", "customer discovery", "JTBD interviews" | Screener → interview script → synthesis → pattern aggregation using Jobs-to-be-Done format |
+| `pmf-pulse` | "do we have PMF", "product-market fit", "should we keep building" | Sean Ellis survey + retention curve + churn pattern analysis → PMF score report |
+| `pitch-deck` | "build a pitch deck", "investor presentation", "raise funding" | Narrative-first pitch deck: 10-slide structure, each slide answers one investor question |
+| `investor-update` | "monthly investor update", "write to investors", "advisor update" | 250-word monthly update template — metrics table, highlights, lowlights, specific ask |
+| `runway` | "how long do I have", "burn rate", "runway calculation" | Burn rate + 3 runway scenarios + fundraising trigger date + default alive check |
+
+---
+
+## XIII. Solo Founder Skills (Tier 2 — Growth)
+
+> Skills for founders getting first customers and building repeatable processes.
+
+| Skill | Trigger | What It Does |
+|-------|---------|-------------|
+| `launch-strategy` | "launch this product", "go to market", "Product Hunt", "Show HN" | Full launch plan: channel selection, pre-launch checklist, day-of playbook by channel |
+| `sales-playbook` | "close more customers", "first 10 customers", "build a sales process" | ICP definition, cold outreach templates, demo flow, objection handling, pipeline tracker |
+| `pricing-strategy` | "how should I price this", "pricing page", "am I underpriced" | Competitor research, value-based pricing calc, 3-tier page copy, validation experiment |
+| `growth-experiment` | "growth experiment", "test this channel", "acquisition ideas" | Hypothesis → ICE prioritization → run → results → patterns across AARRR funnel |
+| `legal-basics` | "legal basics", "incorporation", "contracts", "equity paperwork" | Incorporation checklist, IP assignment, contractor agreements, SAFE vs priced round |
+
+---
+
+## XIV. Solo Founder Skills (Tier 3 — Scale)
+
+> Skills for founders building for the long term: equity, hiring, content, and operating cadence.
+
+| Skill | Trigger | What It Does |
+|-------|---------|-------------|
+| `cap-table` | "cap table", "equity model", "dilution", "SAFE conversion" | Founder equity, round dilution modeling, SAFE conversion math, option pool planning |
+| `first-hire` | "first hire", "hiring process", "employee #1", "how to hire" | Role definition, sourcing strategy, interview rubric, equity offer, 30-day onboarding |
+| `content-machine` | "content strategy", "build in public", "SEO content", "newsletter" | Pillar → derivatives → social → SEO cluster → content calendar → build-in-public templates |
+| `demo-script` | "product demo", "demo script", "show the product", "demo video" | Hook → aha moment → proof → CTA for 5-min demos, sales calls, or launch videos |
+| `decision-journal` | "log this decision", "decision journal", "decision review" | Log decisions with alternatives + reasoning → monthly review → quarterly pattern analysis |
+| `founder-rhythm` | "weekly plan", "monthly review", "founder cadence", "operating rhythm" | Weekly (Mon plan / Fri retro) + monthly (metrics + investor update) + quarterly direction check |
+
+---
+
 ## Skill Counts
 
 | Category | Count |
@@ -154,4 +197,7 @@ Every skill is a slash command (`/skill-name`) in Claude Code.
 | State & Memory | 3 |
 | Third-Party Plugins | 2 |
 | Meta | 2 |
-| **Total** | **57** |
+| Solo Founder — Tier 1 (Critical) | 5 |
+| Solo Founder — Tier 2 (Growth) | 5 |
+| Solo Founder — Tier 3 (Scale) | 6 |
+| **Total** | **73** |

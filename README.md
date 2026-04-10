@@ -9,7 +9,7 @@ Fork this. Replace the mission. Customize agent context for your domain. Ship.
 
 ## What This Is
 
-company-os gives you a fully-staffed AI company for any project — 11 specialized agents, 57 skills, coordinated by Paperclip, sharpened by gstack, and learning from every session through a persistent memory layer.
+company-os gives you a fully-staffed AI company for any project — 12 specialized agents, 73 skills, coordinated by Paperclip, sharpened by gstack, and learning from every session through a persistent memory layer.
 
 It's not a chatbot setup. It's an operating system for building products with AI.
 
@@ -26,7 +26,7 @@ Paperclip          ← coordinates the fleet (dashboard, inbox, budgets, audit t
 | Layer | What It Does | Why It Matters |
 |-------|-------------|----------------|
 | **Paperclip** | Parallel agent execution, mission control dashboard, human inbox, per-agent budget controls, full audit trail | Agents coordinate without stepping on each other. You see everything. |
-| **gstack** | 57 skills — slash commands that make each Claude Code session operate like a specialized professional | `/ship` doesn't just git push. It merges base, runs tests, reviews diff, bumps VERSION, writes CHANGELOG, creates PR. |
+| **gstack** | 73 skills — slash commands that make each Claude Code session operate like a specialized professional | `/ship` doesn't just git push. It merges base, runs tests, reviews diff, bumps VERSION, writes CHANGELOG, creates PR. |
 | **Memory** | MEMORY.md auto-loads into every session. learnings.jsonl stores operational patterns. Checkpoints save mid-session state. | Agents remember. Each session builds on the last. |
 
 ---
@@ -47,14 +47,15 @@ Chief of Staff (claude-opus-4.6)
 ├── Creative Team
 │   ├── Design Consultant   — brand, design system (DESIGN.md), visual direction
 │   └── Content Writer      — copy, policy docs, brand voice
-└── Security Officer        — CSO audits, guardrails, threat modeling
+├── Security Officer        — CSO audits, guardrails, threat modeling
+└── Solo Founder            — customer discovery, PMF, fundraising, hiring, operating cadence
 ```
 
-**Models:** Chief of Staff and CTO run on `claude-opus-4.6`. All other agents run on `claude-sonnet-4.6`.
+**Models:** Chief of Staff, CTO, and Solo Founder run on `claude-opus-4.6`. All other agents run on `claude-sonnet-4.6`.
 
 ---
 
-## Skill Coverage — 57 Skills Across 11 Categories
+## Skill Coverage — 73 Skills Across 14 Categories
 
 Every skill is a slash command in Claude Code. Each is wired to the right agent in `.paperclip.yaml`.
 
@@ -169,6 +170,37 @@ Every skill is a slash command in Claude Code. Each is wired to the right agent 
 |-------|-------------|
 | `/gstack-upgrade` | Upgrade gstack to latest version |
 | `/setup-deploy` | Configure deployment settings for `/land-and-deploy` |
+
+### Solo Founder — Tier 1: Critical Month 1-3 (5 skills)
+
+| Skill | What It Does |
+|-------|-------------|
+| `/user-interview` | Screener → interview script → synthesis → pattern aggregation using JTBD format |
+| `/pmf-pulse` | Sean Ellis survey + retention curve + churn pattern analysis → PMF score report |
+| `/pitch-deck` | Narrative-first pitch deck: 10-slide structure, each slide answers one investor question |
+| `/investor-update` | 250-word monthly update template — metrics table, highlights, lowlights, specific ask |
+| `/runway` | Burn rate + 3 runway scenarios + fundraising trigger date + default alive check |
+
+### Solo Founder — Tier 2: Growth Month 3-9 (5 skills)
+
+| Skill | What It Does |
+|-------|-------------|
+| `/launch-strategy` | Full launch plan: channel selection, pre-launch checklist, day-of playbook by channel |
+| `/sales-playbook` | ICP definition, cold outreach templates, demo flow, objection handling, pipeline tracker |
+| `/pricing-strategy` | Competitor research, value-based pricing calc, 3-tier page copy, validation experiment |
+| `/growth-experiment` | Hypothesis → ICE prioritization → run → results → patterns across AARRR funnel |
+| `/legal-basics` | Incorporation checklist, IP assignment, contractor agreements, SAFE vs priced round |
+
+### Solo Founder — Tier 3: Scale Month 6-18 (6 skills)
+
+| Skill | What It Does |
+|-------|-------------|
+| `/cap-table` | Founder equity, round dilution modeling, SAFE conversion math, option pool planning |
+| `/first-hire` | Role definition, sourcing strategy, interview rubric, equity offer, 30-day onboarding |
+| `/content-machine` | Pillar → derivatives → social → SEO cluster → content calendar → build-in-public templates |
+| `/demo-script` | Hook → aha moment → proof → CTA for 5-min demos, sales calls, or launch videos |
+| `/decision-journal` | Log decisions with alternatives + reasoning → monthly review → quarterly pattern analysis |
+| `/founder-rhythm` | Weekly (Mon plan / Fri retro) + monthly (metrics + investor update) + quarterly direction check |
 
 ---
 
@@ -380,7 +412,7 @@ company-os/
 ├── CLAUDE.md                ← gstack skill routing (40+ routes for Claude Code)
 ├── COMPANY.md               ← product overview, stack explanation, getting started
 ├── AGENTS.md                ← full agent roster, skill matrix, coordination protocols
-├── SKILLS.md                ← complete 57-skill catalog with descriptions
+├── SKILLS.md                ← complete 73-skill catalog with descriptions
 ├── CHANGELOG.md
 │
 ├── agents/
@@ -401,9 +433,27 @@ company-os/
 │   ├── engineering/README.md← engineering workflow, standards, branch conventions
 │   └── creative/README.md   ← design + content workflow, DESIGN.md as source of truth
 │
+├── skills/
+│   ├── user-interview/      ← JTBD customer discovery workflow
+│   ├── pmf-pulse/           ← PMF measurement (Sean Ellis + retention)
+│   ├── pitch-deck/          ← 10-slide narrative pitch deck builder
+│   ├── investor-update/     ← 250-word monthly update template
+│   ├── runway/              ← burn rate + 3 scenarios + fundraising trigger
+│   ├── launch-strategy/     ← channel playbooks (PH, HN, X, email)
+│   ├── sales-playbook/      ← ICP → outreach → demo → close
+│   ├── pricing-strategy/    ← value-based pricing + 3-tier page copy
+│   ├── growth-experiment/   ← ICE scoring + AARRR experiment log
+│   ├── legal-basics/        ← incorporation checklist + SAFE guide
+│   ├── cap-table/           ← dilution modeling + SAFE conversion
+│   ├── first-hire/          ← role rubric + equity offer + onboarding
+│   ├── content-machine/     ← pillar → social → SEO + build-in-public
+│   ├── demo-script/         ← hook → aha moment → proof → CTA
+│   ├── decision-journal/    ← decision log + monthly review + bias audit
+│   └── founder-rhythm/      ← weekly/monthly/quarterly operating cadence
+│
 └── memory/
     ├── README.md            ← 5-layer memory system documentation
-    ├── heartbeat.md         ← heartbeat checklist template for all 11 agents
+    ├── heartbeat.md         ← heartbeat checklist template for all 12 agents
     ├── claude-mem-setup.md  ← claude-mem Paperclip integration guide
     └── auto-dream.sh        ← nightly MEMORY.md consolidation script
 ```

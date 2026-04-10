@@ -1,5 +1,30 @@
 # Changelog — company-os
 
+## [1.2.0] — 2026-04-10
+
+### Added
+- **16 solo-founder skills** — complete 0-to-18-month founder skill stack organized in 3 tiers:
+  - **Tier 1 (Month 1-3, Critical):** `user-interview`, `pmf-pulse`, `pitch-deck`, `investor-update`, `runway`
+  - **Tier 2 (Month 3-9, Growth):** `launch-strategy`, `sales-playbook`, `pricing-strategy`, `growth-experiment`, `legal-basics`
+  - **Tier 3 (Month 6-18, Scale):** `cap-table`, `first-hire`, `content-machine`, `demo-script`, `decision-journal`, `founder-rhythm`
+- **`solo-founder` agent** — new `claude-opus-4.6` agent in `.paperclip.yaml`. The founder's co-pilot: customer discovery, PMF measurement, fundraising, financial modeling, legal scaffolding, hiring, growth, and weekly/monthly operating cadence. Owns all 16 solo-founder skills plus cross-functional skills (`write-brief`, `brainstorming`, `frame-problem`, `synthesize-research`, `x-research`, `last30days-nux`).
+- **`skills/` directory** — 16 subdirectories each with `SKILL.md` defining full workflows, output formats, and chains-with references.
+- **Solo Founder routing in `CLAUDE.md`** — 20 new trigger patterns across 3 routing groups (Customer Discovery & PMF, Fundraising & Finance, Team & Scale).
+
+### Changed
+- **`SKILLS.md`** — Added sections XII (Tier 1, 5 skills), XIII (Tier 2, 5 skills), XIV (Tier 3, 6 skills). Total: 57 → 73 skills.
+- **`AGENTS.md`** — Added `solo-founder` to agent roster, 16 new entries in skill-to-agent matrix, and two new coordination protocols (Solo Founder Weekly Cadence, 0-to-1 Discovery Flow).
+- **`README.md`** — Updated skill count (57 → 73), agent count (11 → 12), added solo-founder to team org chart, added 3 new skill sections, updated repo structure to show `skills/` directory.
+- **`.paperclip.yaml`** — Added `solo-founder` agent block with `skills_path: ./skills` pointing to the local skills directory.
+
+### Design Decisions
+- **Tier structure** mirrors startup chronology, not priority. Founders don't need a cap table on day 1 — they need PMF signal. Skills are tiered so the operator knows where to start.
+- **opus-4.6 for solo-founder** — same as `chief-of-staff` and `cto`. Business-building decisions (hire vs. not, raise vs. not, pivot vs. persist) carry irreversible consequences. Opus-class reasoning is warranted.
+- **`skills_path: ./skills`** — local skills directory enables customization per fork. Teams can add domain-specific variants without touching the gstack installation.
+- **Cross-functional skills included** — `write-brief`, `brainstorming`, `x-research` are re-used from other agents. Solo founders don't have specialists — they need the full surface.
+
+---
+
 ## [1.1.0] — 2026-04-10
 
 ### Added

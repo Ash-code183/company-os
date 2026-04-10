@@ -79,6 +79,28 @@ Do NOT answer directly when a skill exists for the task.
 - What have we learned / show learnings → `/learn`
 - Upgrade gstack → `/gstack-upgrade`
 
+### Solo Founder — Customer Discovery & PMF
+- Talk to users / customer discovery / JTBD interviews → `/user-interview`
+- Do we have PMF / product-market fit / should we keep building → `/pmf-pulse`
+- Launch this product / go to market / Product Hunt / Show HN → `/launch-strategy`
+- Close more customers / first 10 customers / build sales process → `/sales-playbook`
+- How should I price this / pricing page / am I underpriced → `/pricing-strategy`
+- Growth experiment / test this channel / acquisition ideas → `/growth-experiment`
+
+### Solo Founder — Fundraising & Finance
+- Build a pitch deck / investor presentation / raise funding → `/pitch-deck`
+- Monthly investor update / write to investors / advisor update → `/investor-update`
+- How long do I have / burn rate / runway calculation → `/runway`
+- Cap table / equity model / dilution / SAFE conversion → `/cap-table`
+- Legal basics / incorporation / contracts / equity paperwork → `/legal-basics`
+
+### Solo Founder — Team & Scale
+- First hire / hiring process / employee #1 → `/first-hire`
+- Content strategy / build in public / SEO content / newsletter → `/content-machine`
+- Product demo / demo script / show the product → `/demo-script`
+- Log this decision / decision journal / decision review → `/decision-journal`
+- Weekly plan / monthly review / founder cadence / operating rhythm → `/founder-rhythm`
+
 ---
 
 ## Design System

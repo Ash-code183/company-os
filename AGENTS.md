@@ -42,6 +42,7 @@ Paperclip                    ← company-level orchestration
 | `design-consultant` | sonnet-4.6 | Creative | Design system, brand, visual direction |
 | `security-officer` | sonnet-4.6 | Engineering | CSO audits, guardrails, threat modeling |
 | `content-writer` | sonnet-4.6 | Creative | Copy, policy docs, brand voice |
+| `solo-founder` | opus-4.6 | Founder | Customer discovery, PMF, fundraising, legal, hiring, operating cadence |
 
 ---
 
@@ -96,6 +97,22 @@ Paperclip                    ← company-level orchestration
 | `writing-documentation` | content-writer | research-analyst |
 | `autoplan` | chief-of-staff | — |
 | `learn` | any agent | — |
+| `user-interview` | solo-founder | — |
+| `pmf-pulse` | solo-founder | — |
+| `pitch-deck` | solo-founder | — |
+| `investor-update` | solo-founder | — |
+| `runway` | solo-founder | — |
+| `launch-strategy` | solo-founder | — |
+| `sales-playbook` | solo-founder | — |
+| `pricing-strategy` | solo-founder | — |
+| `growth-experiment` | solo-founder | — |
+| `legal-basics` | solo-founder | — |
+| `cap-table` | solo-founder | — |
+| `first-hire` | solo-founder | — |
+| `content-machine` | solo-founder | — |
+| `demo-script` | solo-founder | — |
+| `decision-journal` | solo-founder | — |
+| `founder-rhythm` | solo-founder | — |
 
 ---
 
@@ -132,6 +149,26 @@ Any agent flags issue → Security Officer (/cso or /investigate)
       → Report with severity + remediation
       → Chief of Staff approves remediation priority
       → Backend/Frontend fix → Security Officer verifies
+```
+
+### Solo Founder Weekly Cadence
+```
+Monday  → Solo Founder (/founder-rhythm --mode=week-plan)
+Friday  → Solo Founder (/founder-rhythm --mode=week-retro → /decision-journal)
+Monthly → Solo Founder (/founder-rhythm --mode=monthly)
+          → /runway (burn + scenarios)
+          → /pmf-pulse (if 50+ users)
+          → /investor-update (draft from monthly review)
+Quarter → Solo Founder (/founder-rhythm --mode=quarterly)
+          → /decision-journal (quarterly pattern analysis)
+```
+
+### 0-to-1 Discovery Flow
+```
+User → Solo Founder (/user-interview → /pmf-pulse)
+     → if PMF signal: /pitch-deck + /runway + /launch-strategy
+     → if no PMF: /growth-experiment → iterate
+     → if raising: /investor-update (monthly) + /cap-table
 ```
 
 ---

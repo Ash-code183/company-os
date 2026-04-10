@@ -198,6 +198,46 @@ agents:
       max_context_tokens: 400    # brand voice patterns, tone decisions
       inject_on_heartbeat: true
 
+  solo-founder:
+    model: claude-opus-4-6
+    description: >
+      The founder's co-pilot. Handles the business-building layer that product and
+      engineering skills don't cover: customer discovery, PMF measurement, fundraising,
+      financial modeling, legal scaffolding, hiring, growth, and the weekly/monthly
+      operating cadence. Primary agent for the 0-to-1 journey.
+    skills:
+      # Tier 1 — Critical (Month 1-3)
+      - user-interview
+      - pmf-pulse
+      - pitch-deck
+      - investor-update
+      - runway
+      # Tier 2 — Growth (Month 3-9)
+      - launch-strategy
+      - sales-playbook
+      - pricing-strategy
+      - growth-experiment
+      - legal-basics
+      # Tier 3 — Scale (Month 6-18)
+      - cap-table
+      - first-hire
+      - content-machine
+      - demo-script
+      - decision-journal
+      - founder-rhythm
+      # Cross-functional (from other agents)
+      - write-brief
+      - brainstorming
+      - frame-problem
+      - synthesize-research
+      - x-research
+      - last30days-nux
+    memory:
+      claude_mem: true
+      max_context_tokens: 1000   # founder context is high-value — more budget
+      inject_on_heartbeat: true
+    skills_path: ./skills          # local skills directory (relative to repo root)
+
 teams:
   product:
     lead: chief-of-staff
