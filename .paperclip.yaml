@@ -1,0 +1,176 @@
+schema: paperclip/v1
+
+company:
+  name: company-os
+  mission: >
+    A generic, forkable AI company operating system built on Paperclip + gstack.
+    Replace this mission with your own. Every agent, skill, and memory path
+    works out of the box — customize agent context for your domain.
+  version: 1.0.0
+  template: true  # mark as a forkable template
+
+# ─── Agent Org Chart ──────────────────────────────────────────────────────────
+#
+#   Chief of Staff (opus-4.6)
+#   ├── Product Manager       → discover, plan, evaluate
+#   ├── Research Analyst      → x-research, last30days, synthesize
+#   ├── CTO                   → architecture, codex, health
+#   │   ├── Frontend Engineer → UI, design system
+#   │   ├── Backend Engineer  → API, data, implementation
+#   │   └── Release Engineer  → git, ship, deploy
+#   ├── QA Engineer           → test, benchmark, canary
+#   ├── Design Consultant     → brand, design system, visual
+#   ├── Security Officer      → CSO, guardrails
+#   └── Content Writer        → copy, policy, docs
+#
+# ─────────────────────────────────────────────────────────────────────────────
+
+agents:
+  chief-of-staff:
+    model: claude-opus-4-6
+    description: Strategic direction, scope decisions, 10-star product thinking
+    skills:
+      - plan-ceo-review
+      - office-hours
+      - plan-strategy
+      - frame-problem
+      - write-brief
+      - evaluating
+      - brainstorming
+
+  product-manager:
+    model: claude-sonnet-4-6
+    description: Product discovery, 0-to-1, PRDs, jobs-to-be-done
+    skills:
+      - discover-product
+      - brainstorming
+      - writing-plans
+      - synthesize-research
+      - evaluating
+      - frame-problem
+
+  research-analyst:
+    model: claude-sonnet-4-6
+    description: Research, competitive intelligence, synthesis
+    skills:
+      - x-research
+      - last30days-nux
+      - researching-web
+      - researching-codebase
+      - synthesize-research
+      - writing-documentation
+
+  cto:
+    model: claude-opus-4-6
+    description: Technical architecture, code quality, cross-team technical decisions
+    skills:
+      - plan-eng-review
+      - codex
+      - health
+      - investigate
+      - review
+      - devex-review
+      - cso
+
+  frontend-engineer:
+    model: claude-sonnet-4-6
+    description: UI components, pages, design system enforcement
+    skills:
+      - frontend-design
+      - design-html
+      - design-review
+      - design-shotgun
+      - qa
+      - benchmark
+
+  backend-engineer:
+    model: claude-sonnet-4-6
+    description: APIs, data models, business logic, integrations
+    skills:
+      - implementing
+      - investigate
+      - health
+      - careful
+      - writing-plans
+      - researching-codebase
+
+  release-engineer:
+    model: claude-sonnet-4-6
+    description: Git workflow, versioning, deploys, PR management
+    skills:
+      - ship
+      - land-and-deploy
+      - github
+      - review
+      - document-release
+      - retro
+      - checkpoint
+    inputs:
+      env:
+        GH_TOKEN:
+          kind: secret
+          requirement: optional
+
+  qa-engineer:
+    model: claude-sonnet-4-6
+    description: Browser testing, visual QA, performance, post-deploy monitoring
+    skills:
+      - qa
+      - qa-only
+      - benchmark
+      - canary
+      - browse
+      - setup-browser-cookies
+      - design-review
+
+  design-consultant:
+    model: claude-sonnet-4-6
+    description: Design system, brand identity, visual direction
+    skills:
+      - design-consultation
+      - design-review
+      - design-shotgun
+      - design-html
+      - brand-voice-enforcement
+      - plan-design-review
+
+  security-officer:
+    model: claude-sonnet-4-6
+    description: Security audits, guardrails, threat modeling
+    skills:
+      - cso
+      - guard
+      - careful
+      - freeze
+      - review
+
+  content-writer:
+    model: claude-sonnet-4-6
+    description: Copy, policy docs, SOPs, brand voice
+    skills:
+      - brand-voice-enforcement
+      - write-policy
+      - write-brief
+      - writing-documentation
+      - evaluating
+
+teams:
+  product:
+    lead: chief-of-staff
+    members:
+      - product-manager
+      - research-analyst
+
+  engineering:
+    lead: cto
+    members:
+      - frontend-engineer
+      - backend-engineer
+      - release-engineer
+      - qa-engineer
+
+  creative:
+    lead: design-consultant
+    members:
+      - content-writer
+      - frontend-engineer
